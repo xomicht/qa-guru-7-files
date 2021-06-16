@@ -23,5 +23,4 @@ public class ZipFileTest {
         String actualData = readTextFromPath(unzipTxtFilePath);
         assertThat(actualData, containsString(expectedData));
     }
-
 }
