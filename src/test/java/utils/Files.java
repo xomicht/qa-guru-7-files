@@ -1,11 +1,15 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -72,6 +76,18 @@ public class Files {
         }
 
         return result;
+    }
+
+    public static String readDocFile(String docPath) throws IOException {
+        FileInputStream fis = new FileInputStream(docPath);
+        HWPFDocument doc = new HWPFDocument(fis);
+        return new WordExtractor(doc).getText();
+    }
+
+    public static String readDocxFile(String docxPath) throws IOException {
+        FileInputStream stream = new FileInputStream(docxPath);
+        XWPFDocument document = new XWPFDocument(stream);
+        return new XWPFWordExtractor(document).getText();
     }
 
 }
